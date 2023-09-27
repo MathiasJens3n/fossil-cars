@@ -1,0 +1,64 @@
+<form [formGroup]="carForm" (ngSubmit)="onAddSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Id" formControlName="id" />
+    <mat-error *ngIf="carForm.get('id')?.hasError('required')"
+      >Id is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Model" formControlName="model" />
+    <mat-error *ngIf="carForm.get('model')?.hasError('required')"
+      >Model is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Qty" formControlName="qty" />
+    <mat-error *ngIf="carForm.get('qty')?.hasError('pattern')"
+      >Qty must be a number</mat-error
+    >
+    <mat-error *ngIf="carForm.get('qty')?.hasError('required')"
+      >Qty is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="QtyChange" formControlName="qtyChange" />
+    <mat-error *ngIf="carForm.get('qtyChange')?.hasError('required')"
+      >QtyChange is required</mat-error
+    >
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Add Car</button>
+</form>
+
+<br />
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef>Model</th>
+    <td mat-cell *matCellDef="let element">{{ element.model }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="qty">
+    <th mat-header-cell *matHeaderCellDef>Qty</th>
+    <td mat-cell *matCellDef="let element">{{ element.qty }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="qty change">
+    <th mat-header-cell *matHeaderCellDef>Qty Change</th>
+    <td mat-cell *matCellDef="let element">{{ element.qtyChange }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="warn" (click)="onRemoveSubmit()">Remove</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
