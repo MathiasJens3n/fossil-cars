@@ -36,12 +36,10 @@ export class CarService {
 
    updateCars(cars: Car[]): void {
     this.cars = cars;
-    this.carSubject$.next(this.cars);
   }
 
-   removeCar() : void{
-    this.cars.pop();
-    this.carSubject$.next(this.cars);
+   removeCar(id: number) : void{
+    this.cars = this.cars.filter(x => x.id !== id);
    }
 
 

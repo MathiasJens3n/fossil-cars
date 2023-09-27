@@ -35,8 +35,8 @@ onAddSubmit(){
   }
 }
 
-onRemoveSubmit(){
-  this.carService.removeCar();
+onRemoveSubmit(id: number){
+  this.carService.removeCar(id);
   this.dataSource = new MatTableDataSource(this.carService.cars)
   console.log(this.dataSource);
 }
